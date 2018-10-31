@@ -1,12 +1,64 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div>
+      <span>문장입력연습</span>
     </div>
-    <router-view/>
+    <div>
+      <button id="startButton" v-on:click="removeDisable">{{message}}</button>
+    </div>
+    <div id="text1" v-for="item in items">
+      <input type="input" v-once v-bind:value="{{item.message}}"/>
+      <input type="input" v-model="inputText" v-bind:class="{ active: isActive }" v-bind:value="{{answer}}"/>
+
+    </div>
   </div>
 </template>
+<script>
+    var text1 = new Vue({
+        el: '#text1',
+        data: {
+            seen : true,
+            isActive : false,
+            items : [
+                {message : '동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세'},
+                {message : '무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세'}
+            ],
+            answer : '',
+            watch: {
+                inputText: function (value) {
+                    this.typingText()
+                }
+            },
+            methods: {
+                typingText: _.debounce(
+                    function () {
+                        if(this.items.message != this.answer){
+                            return false;
+                        }
+
+
+                    }
+
+                ,500)
+
+            }
+        }
+    })
+
+
+    var app5 = new Vue({
+        el: 'startButton',
+        data: {
+            message: '시작'
+        },
+        methods: {
+            removeDisable: function () {
+                text1.isActive = true;
+            }
+        }
+    })
+
+</script>
 
 <style lang="scss">
 #app {
@@ -16,14 +68,5 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+
 </style>
