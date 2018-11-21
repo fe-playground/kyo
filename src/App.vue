@@ -4,61 +4,25 @@
       <span>문장입력연습</span>
     </div>
     <div>
-      <button id="startButton" v-on:click="removeDisable">{{message}}</button>
+      <button>시작</button>
     </div>
-    <div id="text1" v-for="item in items">
-      <input type="input" v-once v-bind:value="{{item.message}}"/>
-      <input type="input" v-model="inputText" v-bind:class="{ active: isActive }" v-bind:value="{{answer}}"/>
-
+    <div>
+      <ul>
+        <li>
+          <p>동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</p>
+          <input type="text" value=""/>
+        </li>
+        <li>
+          <p>무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세</p>
+          <input type="text" value=""/>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button>종료</button>
     </div>
   </div>
 </template>
-<script>
-    var text1 = new Vue({
-        el: '#text1',
-        data: {
-            seen : true,
-            isActive : false,
-            items : [
-                {message : '동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세'},
-                {message : '무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세'}
-            ],
-            answer : '',
-            watch: {
-                inputText: function (value) {
-                    this.typingText()
-                }
-            },
-            methods: {
-                typingText: _.debounce(
-                    function () {
-                        if(this.items.message != this.answer){
-                            return false;
-                        }
-
-
-                    }
-
-                ,500)
-
-            }
-        }
-    })
-
-
-    var app5 = new Vue({
-        el: 'startButton',
-        data: {
-            message: '시작'
-        },
-        methods: {
-            removeDisable: function () {
-                text1.isActive = true;
-            }
-        }
-    })
-
-</script>
 
 <style lang="scss">
 #app {
@@ -67,6 +31,29 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+input {
+  display: block;
+  margin: 10px auto 20px;
+  height: 40px;
+  width: 600px;
+  outline: 0;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 3px 10px;
+  font-size: 16px;
+  text-align: center;
 }
 
 </style>
