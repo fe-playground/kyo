@@ -8,13 +8,8 @@
     </div>
     <div>
       <ul>
-        <li>
-          <p>동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</p>
-          <input type="text" value=""/>
-        </li>
-        <li>
-          <p>무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세</p>
-          <input type="text" value=""/>
+        <li v-for="message in messages">
+          <p>{{ message }}</p>
         </li>
       </ul>
     </div>
@@ -23,6 +18,32 @@
     </div>
   </div>
 </template>
+<script>
+    export default {
+        name: 'app',
+        data(){
+            return {
+                messages: ['동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세',
+                    '무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세'
+                ]
+            }
+        }
+
+
+    }
+
+
+    /*var app = new Vue({
+        el: '#app',
+        data: {
+            messages: [
+                {text : '동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세'},
+                {text : '무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세'}
+            ]
+        }
+    })*/
+
+</script>
 
 <style lang="scss">
 #app {
